@@ -2,26 +2,9 @@
 
 # 最佳实践
 
-## git squash合并commit
-
-```shell
-# dev分支合并到master分支,dev分支多个commit合并
-# step 1 : 同步local/master 和 origin/master
-# step 2 : git checkout dev;git rebase -i master; (此处分支也可以为commit-id)
-# step 3 : 进入编辑页面，保持需要保留的commit为pick,其他commit修改为s（squash缩写）
-# step 4 : git push -f
-```
-
-## A分支的commit-id提交合并到B分支
-
-```shell
-# 在B分支执行
-git cherry-pick <commit-id>
-```
-
 ## 配置ssh免密登陆
 
-```bash
+```shell
 # Step 1: 生成秘钥,一直回车
 ssh-keygen -t rsa -C <comment>
 # Step 2: 将HOME/.ssh/id_rsa.pub 的内容复制到仓库的秘钥管理中
@@ -36,6 +19,29 @@ git config --global i18n.commit.encoding utf-8
 git config --global i18n.logoutputencoding utf-8
 # 设置环境变量
 set LESSCHARSET=utf-8
+```
+
+## git squash合并commit
+
+```shell
+# dev分支合并到master分支,dev分支多个commit合并
+# step 1 : 同步local/master 和 origin/master
+# step 2 : git checkout dev;git rebase -i master; (此处分支也可以为commit-id)
+# step 3 : 进入编辑页面，保持需要保留的commit为pick,其他commit修改为s（squash缩写）
+# step 4 : git push -f
+```
+
+## 修改本次提交信息
+
+```shell
+git commit --amend # 修改最近一次提交的提交信息
+```
+
+## A分支的commit-id提交合并到B分支
+
+```shell
+# 在B分支执行
+git cherry-pick <commit-id>
 ```
 
 ## 版本回退
