@@ -209,7 +209,7 @@ java -XX:+PrintCommandLineFlags
 
 Java Hotspot 64Bit Server VM warning：ignoring option MaxPermSize=1280m:support was removed in 8.0
 
-![GC](assets/GC-1642057159107.jpg)
+![GC常用参数](assets/GC常用参数.png)
 
 # 最佳实践
 
