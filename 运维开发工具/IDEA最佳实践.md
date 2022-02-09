@@ -5,17 +5,27 @@
 <property name="dynamic.classpath" value="true" />
 ```
 
-# 代码提示忽略大小写
+# 基本设置
 
-```shell
-File -> setting-> Editor -> General -> Code Completion -> Match case 勾选掉
-```
+## 代码提示忽略大小写
 
-# 自动导包
+![1644375520044](assets/1644375520044.png)
 
-```shell
-File -> setting-> Editor -> General -> Auto Import -> Add ... Optimize... 选中
-```
+## 自动导包
+
+![1644375423625](assets/1644375423625.png)
+
+## 自动折叠代码行数
+
+![1644375299988](assets/1644375299988.png)
+
+## 变更代码文件夹变色
+
+![1644375647713](assets/1644375647713.png)
+
+## 取消打开软件时打开项目
+
+![1644375795422](assets/1644375795422.png)
 
 # 常用快捷键
 
@@ -35,7 +45,19 @@ File -> setting-> Editor -> General -> Auto Import -> Add ... Optimize... 选中
 
 
 
-大小写切换  ctr +  shift +u 
+大小写切换  ctrl +  shift +u 
+
+## 代码补全
+
+补全返回值  .val
+
+补全分号   ctrl + shift + enter
+
+补全if语句  boolean.if
+
+补全while语句  boolean.while
+
+万能补全语句  ctrl + alt + T
 
 ## 查找&移动
 
