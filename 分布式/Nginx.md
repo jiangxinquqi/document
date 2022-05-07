@@ -1,4 +1,4 @@
-# Nginx在Linux环境下的安装
+# nginx在Linux环境下的安装
 
 第一步，安装gcc的环境。
 
@@ -120,7 +120,7 @@ events {
 
 http {
     # 设定mime类型,类型由mime.type文件定义
-    include      mime.types;
+    include       mime.types;
     default_type  application/octet-stream;
 
     # 日志格式设置。
@@ -194,13 +194,13 @@ http {
     # 在需要使用负载均衡的server中增加
     # proxy_pass http://bakend/;
     # 每个设备的状态设置为:
-    # 1.down表示单前的server暂时不参与负载
+    # 1.down表示当前的server暂时不参与负载
     # 2.weight为weight越大，负载的权重就越大。
     # 3.max_fails：允许请求失败的次数默认为1.当超过最大次数时，返回proxy_next_upstream模块定义的错误
     # 4.fail_timeout:max_fails次失败后，暂停的时间。
     # 5.backup： 其它所有的非backup机器down或者忙的时候，请求backup机器。所以这台机器压力会最轻。
     # nginx支持同时设置多组的负载均衡，用来给不用的server来使用。
-    # client_body_in_file_only设置为On 可以讲client post过来的数据记录到文件中用来做debug
+    # client_body_in_file_only设置为On 可以将client post过来的数据记录到文件中用来做debug
     # client_body_temp_path设置记录文件的目录 可以设置最多3层目录
     # location对URL进行匹配.可以进行重定向或者进行新的代理 负载均衡
    
@@ -390,18 +390,17 @@ server {
     }
 }
 
+upstream jzshop{
+    server 172.16.0.212:8080;
+    server 172.16.0.209:8080;
+}
 
-    upstream jzshop{
-        server 172.16.0.212:8080;
-        server 172.16.0.209:8080;
+server {
+    listen      8080;
+    server_name  shop.sctobacco.com;
+
+    location / {
+        proxy_pass http://jzshop;
     }
-
-    server {
-        listen      8080;
-        server_name  shop.sctobacco.com;
-
-        location / {
-            proxy_pass http://jzshop;
-        }
-    }
+}
 ```

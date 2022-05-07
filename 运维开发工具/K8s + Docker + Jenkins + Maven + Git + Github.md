@@ -1,12 +1,9 @@
 # 机器部署
 
 ```bash
-192.168.1.71 saas01
-192.168.1.72 saas02
-192.168.1.73 saas03
-192.168.1.71 saas01.cloud.com  # K8s-master Docker
-192.168.1.72 saas02.cloud.com  # K8s-node Docker
-192.168.1.73 saas03.cloud.com  # K8s-node Docker
+192.168.1.71 saas01 saas01.cloud.com  # K8s-master Docker
+192.168.1.72 saas02 saas02.cloud.com  # K8s-node Docker
+192.168.1.73 saas03 saas03.cloud.com  # K8s-node Docker
 192.168.1.81 proxy.cloud.com # 80: nginx
 192.168.1.91 devops.cloud.com  # Jenkins + Maven + Git
 
@@ -290,7 +287,7 @@ yum install docker-ce-19.03.13 -y
 [root@master ~]# vim /etc/docker/daemon.json
 
 {
-	"registry-mirrors": ["https://xxxx.mirror.aliyuncs.com"],
+  "registry-mirrors": ["https://xxxx.mirror.aliyuncs.com"],
   "exec-opts": ["native.cgroupdriver=systemd"]
 }
 ```

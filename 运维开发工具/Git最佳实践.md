@@ -24,7 +24,7 @@ set LESSCHARSET=utf-8
 ```shell
 # dev分支合并到master分支,dev分支多个commit合并
 # step 1 : 同步local/master 和 origin/master
-# step 2 : git checkout dev;git rebase -i master; (此处分支也可以为commit-id)
+# step 2 : git checkout dev;git rebase -i master; (此处分支也可以为commit-id) 
 # step 3 : 进入编辑页面，保持需要保留的commit为pick,其他commit修改为s（squash缩写）
 # step 4 : git push -f
 ```
@@ -35,7 +35,7 @@ set LESSCHARSET=utf-8
 git commit --amend # 修改最近一次提交的提交信息
 ```
 
-## A分支的commit-id提交合并到B分支
+## A分支的commit-id提交合并到B分支 
 
 ```shell
 # 在B分支执行
@@ -55,7 +55,7 @@ git checkout . # 放弃所有本次修改
 
 ```bash
 git reset HEAD file_name
-git reset HEAD . # 放弃所有缓存
+git reset HEAD . # 放弃所有缓存 
 ```
 
 ### 3）已经使用git commit提交
@@ -96,6 +96,7 @@ git config --global i18n.logoutputencoding utf-8
 查看远程分支：git branch -r
 查看远程分支：git branch -a //显示远程分支
 删除远程分支：git branch -d [branch_name] // -d只能删除已经合并的分支。-D强制删除
+修改本地分支名称：git branch -m [old_branch_name] [new_branch_name]
 ```
 
 ## git stash

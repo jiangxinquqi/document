@@ -157,7 +157,7 @@ java -XX:+PrintCommandLineFlags
 -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./
 ```
 
-4、发送OOM后，执行一个脚本
+4、发生OOM后，执行一个脚本
 
 -XX:OnOutOfMemoryError
 

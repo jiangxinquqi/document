@@ -28,10 +28,10 @@ solr zk mkroot /solr -z zk01.cloud.com:2181,zk02.cloud.com:2181,zk03.cloud.com:2
 solr zk ls /solr -z zk01.cloud.com:2181,zk02.cloud.com:2181,zk03.cloud.com:2181
 
 # 5. 上传solr配置文件
-solr zk upconfig -n default_01 -d /home/xiaojianjun/solrconfig/default_01
+solr zk upconfig -n default_01 -d /home/xiaojianjun/solrconfig/default_01  
 
 # 6. 创建 collection
-solr create -c default_01 -n default_01 -shards 2 -replicationFactor 1 -force
+solr create -c default_01 -n default_01 -shards 2 -replicationFactor 1 -force 
 
 # 7. 启动
 solr start -p 8983 -cloud -force

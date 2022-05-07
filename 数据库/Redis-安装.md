@@ -29,9 +29,12 @@
 [root@xiaojianjun-redis  bin]# cp /opt/redis-3.0.0/redis.conf /opt/redis/bin
 
 # 配置后台启动
-[root@db01 bin]# vim /opt/redis/bin/redis.conf 
+[root@db01 bin]# vim /opt/redis/bin/redis.conf
+
+配置密码： requirepass xiaojianjun
+
 # 以配置文件启动
-[root@db01 bin]# /opt/redis/redis-server /opt/redis/bin/redis.conf 
+[root@db01 bin]# /opt/redis/bin/redis-server /opt/redis/bin/redis.conf 
 ```
 
 # 启动脚本

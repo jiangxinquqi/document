@@ -56,7 +56,7 @@ vim /var/kerberos/krb5kdc/kdc.conf
  kdc_tcp_ports = 88
 
 [realms]
- SHALLWE.COM = {
+ CLOUD.COM = {
   #master_key_type = aes256-cts
   max_renewable_life = 7d 0h 0m 0s
   acl_file = /var/kerberos/krb5kdc/kadm5.acl
@@ -78,7 +78,7 @@ hdfs.keytab  kadm5.acl  kdc.conf.m1  kdc.conf.m3  kdc.conf.orig  principal.kadm5
 HTTP.keytab  kdc.conf   kdc.conf.m2  kdc.conf.m4  principal      principal.kadm5.lock
 若要从新初始化数据库则需要删除　
 rm -rf /var/kerberos/krb5kdc/principal*
-之后在重新初始化数据即可　kdb5_util create -s -r HADOOP.COM
+之后在重新初始化数据即可　kdb5_util create -s -r CLOUD.COM
 ```
 
 #  在maste服务器上创建admin用户  
@@ -112,9 +112,11 @@ for i in {2,3,4} ;do scp /etc/krb5.conf root@cdp0$i:/etc/;done
 kinit admin/admin@CLOUD.COM
 ```
 
-# Cloudera Manager 集成Kerberos 
+# Cloudera Manager 安装Kerberos 
 
 # 浏览器Web UI认证  
+
+参考： https://mp.weixin.qq.com/s?__biz=MzI4OTY3MTUyNg==&mid=2247483853&idx=1&sn=442a8ba87c922857253a437affe42506&chksm=ec2ad1c4db5d58d2933ae5cde4ab1a7443c944e94aca85b51cbd8e9f4f3772162a39074da49d&scene=21#wechat_redirect
 
 1. 安装Firefox浏览器
 2. 安装MIT Kerberos Windows客户端
@@ -124,9 +126,39 @@ kinit admin/admin@CLOUD.COM
 https://web.mit.edu/kerberos/
 ```
 
-1. 配置krb5.ini文件
-2. 配置Firefox的高级选项：
-   network.negotiate-auth.trusted-uris中设置需要访问的主机名
-   network.auth.use-sspi设置为关闭
+3. 将KDC Server服务器上/ect/krb5.conf文件中的部分内容，拷贝到krb5.ini文件中 
+4. 配置Firefox的高级选项，地址栏输入**about:config**
 
-1. 进行Kerberos认证，认证成功后打开对应的WebUI页面。
+```shell
+# 置需要访问的主机名, 多个域名以逗号分隔
+network.negotiate-auth.trusted-uris = cdp01.cloud.com,cdp02.cloud.com
+network.auth.use-sspi = false
+```
+
+5. 进行Kerberos认证，认证成功后打开对应的WebUI页面。
+
+   ```
+   find /var/run/cloudera-scm-agent -name "*-hdfs-NAMENODE"
+   ```
+
+   CDP keytab文件下载：CM节点的/var/run/cloudera-scm-agent /xxx-hdfs-NAMENODE/hdfs.keytab
+
+6. 常用指令
+
+   ```
+   ## KDC Server
+   sudo kadmin.local
+   > addprinc test@CLOUD.COM # 新增用户
+   > xst -norandkey -k test.keytab test@CLOUD.COM # 创建该账号的keytab文件，-norandkey必须加，不然会认证失败。
+   > listprincs hdfs* # 查看匹配hdfs用户
+   
+   ## Client
+   kdestroy # 销毁Ticket
+   kinit admin/admin@CLOUD.COM # 账号密码认证
+   kinit -kt test.keytab test@CLOUD.COM # keytab文件认证
+   klist # 查看当前认证用户
+   
+   
+   ```
+
+   
