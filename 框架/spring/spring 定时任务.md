@@ -40,7 +40,7 @@
 
 # 二、配置多线程定时任务
 
-## 方案1. **重写SchedulingConfigurer#configureTasks()**
+- 方案1  **重写SchedulingConfigurer#configureTasks()**
 
 ```java
 @Configuration
@@ -53,13 +53,13 @@ public class ScheduleConfig implements SchedulingConfigurer {
 }
 ```
 
-## 方案2. 通过配置开启
+- 方案2. 通过配置开启
 
 ```properties
 spring.task.scheduling.pool.size=10
 ```
 
-## 方案3. **@Async**
+- 方案3. **@Async**
 
 使用@Async这个注解之前一定是要先配置线程池的，配置如下：
 

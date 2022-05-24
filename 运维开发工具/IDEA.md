@@ -1,4 +1,4 @@
-# IDEA启动命令行过长
+#  IDEA启动命令行过长
 
 ```xml
 项目的.idea/workspace.xml中配置
